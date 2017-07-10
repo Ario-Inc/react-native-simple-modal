@@ -12,13 +12,13 @@ import {
 class Modal extends Component {
   constructor() {
     super();
-    
+
     this.state = {
       opacity: new Animated.Value(0),
       scale: new Animated.Value(0.8),
       offset: new Animated.Value(0)
     };
-    
+
     this.hardwareBackPress = this.hardwareBackPress.bind(this);
   }
   componentWillMount() {
@@ -45,8 +45,8 @@ class Modal extends Component {
         this.close();
       }
     }
-    
-    if (props.offset !== this.props.offset) {
+
+    if (props.offset != this.state.offset) {
       this.animateOffset(props.offset);
     }
   }
@@ -59,7 +59,7 @@ class Modal extends Component {
       this.close();
       return true;
     }
-    
+
     return false;
   }
   componentDidMount() {
@@ -85,7 +85,7 @@ class Modal extends Component {
             duration: animationDuration
           }
         ).start();
-        
+
         Animated.spring(
           this.state.scale,
           {
@@ -94,7 +94,7 @@ class Modal extends Component {
           }
         ).start();
       }
-      
+
       setTimeout(() => {
         if (toValue) {
           this.props.modalDidOpen();
@@ -108,11 +108,11 @@ class Modal extends Component {
   render() {
     const {opacity, open, scale, offset, children} = this.state;
     let containerStyles = [styles.absolute, styles.container, this.props.containerStyle];
-    
+
     if (!this.state.open) {
       containerStyles.push(styles.hidden);
     }
-    
+
     return (
       <View
         pointerEvents={open ? 'auto' : 'none'}
@@ -202,4 +202,3 @@ const styles = StyleSheet.create({
 });
 
 export default Modal;
-  
